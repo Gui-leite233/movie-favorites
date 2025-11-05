@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Favorite {
+model favorite {
   id        Int      @id @default(autoincrement())
   title     String
   movieId   Int      @unique

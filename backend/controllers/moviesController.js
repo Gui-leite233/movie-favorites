@@ -1,6 +1,7 @@
-import prisma from "../prisma/prisma.config.ts";
-import { fetchMoviesFromTMDb } from "../services/tmdbService.js";
+import { PrismaClient } from '@prisma/client';
+import { fetchMoviesFromTMDb, fetchDiscoverMovies } from "../services/tmdbService.js";
 
+const prisma = new PrismaClient();
 export const searchMovies = async (req, res) => {
   const { query } = req.query;
   const data = await fetchMoviesFromTMDb(query);
@@ -12,9 +13,16 @@ export const listFavorites = async (req, res) => {
   res.json(favorites);
 };
 
+export const discoverMovies = async (req, res) => {
+  const data = await fetchDiscoverMovies();
+  res.json(data);
+}
+
 export const addFavorite = async (req, res) => {
   const { title, movieId, posterUrl, rating } = req.body;
-  const newFav = await prisma.favorite.create({ data: { title, movieId, posterUrl, rating } });
+  const newFav = await prisma.favorite.create({
+    data: { title, movieId, posterUrl, rating },
+  });
   res.json(newFav);
 };
 
