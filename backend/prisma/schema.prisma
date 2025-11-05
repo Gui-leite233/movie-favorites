@@ -15,3 +15,10 @@ model favorite {
   rating    Float?
   createdAt DateTime @default(now())
 }
+
+model SharedList {
+  id        Int      @id @default(autoincrement())
+  token     String   @unique
+  favorites Json     // Armazena array de IDs dos favoritos
+  createdAt DateTime @default(now())
+}
