@@ -115,7 +115,7 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">⭐ Favoritos</h1>
+        <h1 className="app-title">Filmes Verzel</h1>
 
         <div className="search-container">
           <input
