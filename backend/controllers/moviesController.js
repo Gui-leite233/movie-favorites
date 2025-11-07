@@ -2,10 +2,21 @@ import { PrismaClient } from "@prisma/client";
 import {
   fetchMoviesFromTMDb,
   fetchDiscoverMovies,
+  fetchPopularMovies,
+  fetchTrendingMovies,
+  fetchTopRatedMovies,
+  fetchUpcomingMovies,
+  fetchActionMovies,
+  fetchComedyMovies,
+  fetchHorrorMovies,
+  fetchRomanceMovies,
+  fetchSciFiMovies,
+  fetchDocumentaries,
 } from "../services/tmdbService.js";
 import * as crypto from "crypto";
 
 const prisma = new PrismaClient();
+
 export const searchMovies = async (req, res) => {
   const { query } = req.query;
   const data = await fetchMoviesFromTMDb(query);
@@ -20,6 +31,53 @@ export const listFavorites = async (req, res) => {
 export const discoverMovies = async (req, res) => {
   const data = await fetchDiscoverMovies();
   res.json(data);
+};
+
+export const getAllCategories = async (req, res) => {
+  try {
+    const [
+      series,
+      popular,
+      trending,
+      topRated,
+      upcoming,
+      action,
+      comedy,
+      horror,
+      romance,
+      sciFi,
+      documentaries,
+    ] = await Promise.all([
+      fetchDiscoverMovies(),
+      fetchPopularMovies(),
+      fetchTrendingMovies(),
+      fetchTopRatedMovies(),
+      fetchUpcomingMovies(),
+      fetchActionMovies(),
+      fetchComedyMovies(),
+      fetchHorrorMovies(),
+      fetchRomanceMovies(),
+      fetchSciFiMovies(),
+      fetchDocumentaries(),
+    ]);
+
+    res.json({
+      series,
+      popular,
+      trending,
+      topRated,
+      upcoming,
+      action,
+      comedy,
+      horror,
+      romance,
+      sciFi,
+      documentaries,
+    });
+  } catch (error) {
+    console.error("Erro ao buscar categorias:", error);
+    res.status(500).json({ error: "Erro ao buscar categorias de filmes" });
+  }
 };
 
 export const addFavorite = async (req, res) => {

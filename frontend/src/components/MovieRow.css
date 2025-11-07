@@ -1,0 +1,37 @@
+.movie-row {
+    margin-bottom: 40px;
+  }
+  
+  .row-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    padding-left: 20px;
+    color: #e5e5e5;
+  }
+  
+  .row-movies {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 0 20px 20px;
+    scroll-behavior: smooth;
+  }
+  
+  .row-movies::-webkit-scrollbar {
+    height: 8px;
+  }
+  
+  .row-movies::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+  }
+  
+  .row-movies::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+  
+  .row-movies::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
