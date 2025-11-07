@@ -15,8 +15,10 @@ function MovieCard({ movie, onAddFavorite, onRemoveFavorite, isFavorite }) {
 
   const handleFavoriteClick = (e) => {
     e.stopPropagation();
+    const movieId = movie.movieId || movie.id;
+
     if (isFavorite) {
-      onRemoveFavorite(movie.id || movie.movieId);
+      onRemoveFavorite(movieId);
     } else {
       onAddFavorite(movie);
     }
